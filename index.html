@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Something Special 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee);
+background-size:400% 400%;
+animation:gradientMove 10s ease infinite;
+font-family:'Playfair Display', serif;
+overflow:hidden;
+position:relative;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+/* screens */
+
+.container{
+position:absolute;
+text-align:center;
+width:90%;
+max-width:520px;
+display:none;
+animation:fadeIn 0.8s ease forwards;
+}
+
+.container.active{
+display:block;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+/* images */
+
+img{
+width:150px;
+margin-bottom:20px;
+}
+
+/* text */
+
+h1{
+font-size:28px;
+margin-bottom:15px;
+}
+
+p{
+font-size:18px;
+margin-bottom:20px;
+}
+
+/* buttons */
+
+button{
+padding:14px 36px;
+border:none;
+border-radius:30px;
+font-size:18px;
+background:linear-gradient(45deg,#ff00cc,#ff0066);
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* animated cursor */
+
+.magic-cursor{
+position:fixed;
+width:14px;
+height:14px;
+border-radius:50%;
+background:linear-gradient(45deg,#ff00cc,#ff0066);
+pointer-events:none;
+transform:translate(-50%,-50%);
+z-index:9999;
+box-shadow:0 0 15px rgba(255,0,120,0.7);
+}
+
+.cursor-trail{
+position:fixed;
+width:8px;
+height:8px;
+border-radius:50%;
+background:white;
+pointer-events:none;
+opacity:0.7;
+animation:trailFade 0.7s linear forwards;
+}
+
+@keyframes trailFade{
+to{
+opacity:0;
+transform:scale(0.2);
+}
+}
+
+/* floating classroom background */
+
+.bg-element{
+position:absolute;
+font-size:45px;
+opacity:0.12;
+pointer-events:none;
+animation:drift 18s linear infinite;
+}
+
+.bg1{top:80%; left:5%;}
+.bg2{top:60%; left:20%;}
+.bg3{top:70%; left:50%;}
+.bg4{top:50%; left:75%;}
+.bg5{top:85%; left:90%;}
+
+@keyframes drift{
+
+0%{transform:translateY(0) translateX(0) rotate(0deg);}
+
+25%{transform:translateY(-120px) translateX(60px) rotate(90deg);}
+
+50%{transform:translateY(-200px) translateX(-40px) rotate(180deg);}
+
+75%{transform:translateY(-120px) translateX(50px) rotate(270deg);}
+
+100%{transform:translateY(0) translateX(0) rotate(360deg);}
+
+}
+
+/* hero section */
+
+.hero-content{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+}
+
+.hero-images img{
+width:110px;
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+}
+
+.dialogue-card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.dialogue{
+font-style:italic;
+color:#ff0066;
+}
+
+/* teacher entry */
+
+.teacher{
+width:140px;
+animation:teacherEntry 1.5s ease;
+}
+
+@keyframes teacherEntry{
+0%{transform:translateY(-200px);opacity:0;}
+100%{transform:translateY(0);opacity:1;}
+}
+
+/* quiz */
+
+.quiz-card{
+background:white;
+padding:60px;
+border-radius:25px;
+box-shadow:0 25px 60px rgba(0,0,0,0.2);
+}
+
+.quiz-question{
+font-size:22px;
+margin-bottom:35px;
+}
+
+.quiz-options{
+display:flex;
+gap:25px;
+justify-content:center;
+}
+
+/* result */
+
+.result{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+.highlight{
+font-size:20px;
+color:#ff0066;
+font-weight:600;
+margin:15px 0;
+}
+
+.ending-line{
+font-style:italic;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="magic-cursor" id="cursor"></div>
+
+<div class="bg-element bg1">📚</div>
+<div class="bg-element bg2">✏️</div>
+<div class="bg-element bg3">🎓</div>
+<div class="bg-element bg4">🧑‍🏫</div>
+<div class="bg-element bg5">📖</div>
+
+<!-- screen1 -->
+
+<div class="container active hero-page" id="screen1">
+
+<img src="https://media.tenor.com/_yGj64wQLZMAAAAj/love-bears.gif" class="hero-bear">
+
+<h1 class="hero-title">You made us.</h1>
+
+<p class="hero-text">
+
+From confusion… to confidence.
+
+<br>
+
+<span class="highlight">From sitting silently in the classroom to finally believing we belong there.</span>
+
+<br>
+
+Two teachers.  
+Two students.  
+One journey that quietly changed everything.
+
+</p>
+<style>
+    .hero-page{
+text-align:center;
+position:relative;
+top:-60px;
+}
+.hero-bear{
+width: 200px;
+margin-bottom:8px;
+animation:floatBear 3s ease-in-out infinite;
+position:center;
+}
+
+.hero-title{
+font-size:40px;
+font-weight:700;
+margin-bottom:6px;
+color:#222;
+}
+
+.hero-text{
+max-width:520px;
+margin:auto;
+font-size:18px;
+line-height:1.8;
+color:#333;
+}
+
+.highlight{
+color:#6f1744;
+font-weight:600;
+}
+
+.hero-btn{
+margin-top:18px;
+}
+
+@keyframes floatBear{
+0%{transform:translateY(0);}
+50%{transform:translateY(-12px);}
+100%{transform:translateY(0);}
+}
+.hero-title{
+background:linear-gradient(45deg,#4d0303,#054b69);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+</style>
+<br>
+<button onclick="nextScreen(2)">Open it 🤍</button>
+</div>
+
+<!-- screen2 -->
+
+<div class="container" id="screen2">
+
+<div class="teacher-avatar">
+    <img src="images/both-mam.jpeg" class="teacher-photo">
+</div>
+
+<h1>For Lakshmi Ma'am & Priya Ma'am 💖</h1>
+
+<p>We are glad, to have mentors like you...✨</p>
+
+<button onclick="nextScreen(3)">Show Me 🤍</button>
+
+</div>
+
+<!-- screen3 -->
+
+<div class="container hero" id="screen3">
+
+<div class="hero-content">
+
+<div class="hero-images">
+
+<img src="images/divyam.jpeg">
+
+<img src="images/me.jpeg">
+</div>
+
+<div class="dialogue-card">
+<h1>Two bestfriends who were always neglected by everyone.</h1>
+<p>
+Uss din hum dono class mai bahut confused baithe the…
+<br><br>
+Future unclear tha. Confidence kam tha.<Br>kyuki uss din pehle kabhi aise fail nhi hue the.<br>
+College aana bhi tab kabhi kabhi optional lagta tha.
+<br><br>
+Phir mnn mai sab chor dene ka kahayal aaya, <br>
+And kisi ne sach he kaha hai, <br> when you leave hopes — MIRACLE HAPPENS.
+</p>
+
+<button onclick="nextScreen(4)">Continue 💛</button>
+
+</div>
+
+</div>
+
+</div>
+
+<style>
+.hero-images{
+display:flex;
+gap:30px;
+justify-content:center;
+margin-bottom:10px;
+}
+.hero-images img{
+width:150px;
+height:150px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid white;
+box-shadow:0 12px 30px rgba(0,0,0,0.25);
+animation:float 3s ease-in-out infinite;
+}
+.hero{
+margin-top:-20px;
+}
+
+.dialogue-card{
+margin-top:-20px;
+}
+.hero-content{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:30px;
+}
+</style>
+<!-- screen4 -->
+
+<div class="container" id="screen4">
+<div class="teacher-avatar">
+    <img src="images/Lakshmi-mam.jpeg" class="teacher-photo">
+</div>
+<h1>Lakshmi Ma'am Appeared ✨</h1>
+
+<p>
+Apne hume sirf padhaaya nahi.
+<br><br>
+Apne hume dekha.
+Woh potential dekha jo shayad humein bhi nhi pta tha ki hum mai exist krta tha.
+<br><br>
+Kabhi kabhi ek teacher bas ek sentence bol deta hai —
+aur poori direction badal jaati hai.
+</p>
+
+<button onclick="nextScreen(6)">Next</button>
+
+</div>
+
+<!-- screen6 -->
+
+<div class="container" id="screen6">
+
+<div class="teacher-avatar">
+    <img src="images/Priya-mam.jpeg" class="teacher-photo">
+</div>
+
+<h1>Then Came Priya Ma'am 🌸</h1>
+
+<p>
+Lakshmi ma'am ki wajah se hi humari mulaqat hui  apse.
+Aur phir kya tha…
+Apne bhi hume support kiya.<br>
+Ek dusra mauka diya hume apne aap ko prove karne ka.
+<br><br>
+Aur phir story aur beautiful ho gayi.
+<br><br>
+Apne sirf guide nahi kiya —
+apne hume push kiya
+jab hum khud par doubt karte the.
+</p>
+
+<button onclick="nextScreen(5)">Continue 🌷</button>
+
+</div>
+<style>
+.teacher-avatar{
+width:160px;
+height:160px;
+border-radius:50%;
+overflow:hidden;
+margin:0 auto 20px;
+border:6px solid white;
+box-shadow:0 15px 40px rgba(0,0,0,0.25);
+animation:avatarEntry 1s ease;
+}
+
+.teacher-avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+object-position:center 25%;
+}
+
+@keyframes avatarEntry{
+from{
+opacity:0;
+transform:scale(0.6);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+</style>
+
+
+<!-- quiz -->
+
+<div class="container" id="screen5">
+
+<div class="quiz-card">
+
+<h1>🎮 Summer Term Quiz</h1>
+
+<p class="quiz-question">Are you lucky to have us? 😊</p>
+
+<div class="quiz-options">
+
+<button class="yes" onclick="nextScreen(10)">YES 💛</button>
+
+<button onclick="nextScreen(7)">NO 😭</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- no -->
+
+<div class="container" id="screen7">
+
+<h1>Hawww Ma'am 😭</h1>
+
+<p>Aisa mat kriye… phir se try kriye!</p>
+
+<button onclick="nextScreen(5)">Try Again</button>
+
+</div>
+
+<!-- result -->
+
+<div class="container result" id="screen10">
+
+<h1>Because of You Both 💛</h1>
+
+<p>
+We tried again and trust again on someone, who trusted us more than anyone.
+<br><br>
+From confusion… to confidence.
+Some stories do not begin with success.
+They begin with absence.
+Two students. Two empty chairs in a classroom.
+Days passed and those seats stayed silent.
+It wasn’t laziness. It wasn’t rebellion.
+It was simply the quiet weight of not believing in yourself.
+But two teachers saw something different.
+They saw potential where doubt lived.
+And slowly everything changed.
+Step by step. Class by class. Effort by effort.
+The same students who once stayed away
+stood proud with their results.
+Because sometimes the biggest change
+begins with something simple —
+someone believing in you first.
+</p>
+
+<button onclick="nextScreen(11)">Continue ✨</button>
+
+</div>
+<style>.result{
+background:linear-gradient(180deg,#ffffff,#fff7fb);
+padding:40px;
+border-radius:25px;
+box-shadow:
+0 20px 60px rgba(0,0,0,0.15),
+0 0 40px rgba(255,0,120,0.15);
+max-width:560px;
+border:3px solid rgba(255,255,255,0.6);
+}
+.result h1{
+background:linear-gradient(45deg,#ff0080,#ff7a00,#ff0080);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+font-size:32px;
+}
+.decor{
+position:absolute;
+font-size:40px;
+opacity:0.25;
+animation:floatDecor 12s infinite linear;
+}
+
+.decor1{top:10%;left:10%;}
+.decor2{top:70%;left:20%;}
+.decor3{top:40%;left:80%;}
+.decor4{top:75%;left:75%;}
+.decor5{top:15%;left:60%;}
+
+@keyframes floatDecor{
+0%{transform:translateY(0) rotate(0deg);}
+50%{transform:translateY(-60px) rotate(180deg);}
+100%{transform:translateY(0) rotate(360deg);}
+}
+.result p{
+font-size:18px;
+line-height:1.8;
+color:#444;
+}
+
+</style>
+
+<!-- final last page -->
+
+<div class="container final-screen" id="screen11">
+
+<div class="final-card">
+
+<div class="sparkle">✨</div>
+
+<h1 class="thank-title">Thank You ❤️</h1>
+
+<p class="final-text">
+This little website is just a small reminder  
+that two students will always be grateful.
+</p>
+
+<p class="miss-line">
+We will truly miss you both 💛
+</p>
+
+<div class="signature">
+<p class="made">Forever grateful ✨</p>
+
+<p>Made with gratitude ✨</p>
+
+<h2>- Anshika & Divyam</h2>
+
+</div>
+
+<button onclick="nextScreen(1)" class="restart-btn">
+Restart Journey 🌸
+</button>
+
+</div>
+</div>
+    <style>
+        
+   .final-screen{
+justify-content:center;
+align-items:center;
+}
+
+.final-screen.active{
+display:flex;
+}
+
+.final-card{
+background:linear-gradient(180deg,#ffffff,#fff7fb);
+padding:50px;
+border-radius:30px;
+max-width:520px;
+text-align:center;
+box-shadow:
+0 25px 80px rgba(0,0,0,0.2),
+0 0 40px rgba(255,0,120,0.15);
+position:relative;
+}
+
+/* Thank you heading */
+
+.thank-title{
+background:linear-gradient(45deg,#ff0080,#ff7a00);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+
+/* main text */
+
+.final-text{
+font-size:18px;
+line-height:1.8;
+color:#555;
+}
+
+/* miss line highlight */
+
+.miss-line{
+font-size:22px;
+margin:25px 0;
+font-weight:600;
+color:#ff0066;
+}
+
+/* signature */
+
+.signature{
+margin-top:25px;
+}
+
+.signature h2{
+font-size:26px;
+color:#333;
+letter-spacing:1px;
+}
+
+.made{
+font-size:14px;
+opacity:0.7;
+}
+
+/* restart button */
+
+.restart-btn{
+margin-top:30px;
+padding:14px 35px;
+border:none;
+border-radius:30px;
+font-size:18px;
+background:linear-gradient(45deg,#ff00cc,#ff0066);
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.restart-btn:hover{
+transform:scale(1.1);
+box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* sparkle */
+
+.sparkle{
+position:absolute;
+top:-20px;
+right:-20px;
+font-size:40px;
+animation:sparkleMove 3s infinite;
+}
+
+@keyframes sparkleMove{
+0%{transform:rotate(0deg);}
+50%{transform:rotate(20deg);}
+100%{transform:rotate(0deg);}
+}
+    .result{
+text-align:center;
+font-size:18px;
+line-height:1.7;
+}
+    </style>
+    <script>
+/* screen switching */
+
+function nextScreen(num){
+
+document.querySelectorAll(".container").forEach(el=>el.classList.remove("active"));
+
+document.getElementById("screen"+num).classList.add("active");
+
+}
+
+/* animated cursor */
+
+const cursor=document.getElementById("cursor");
+
+document.addEventListener("mousemove",(e)=>{
+
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+
+let trail=document.createElement("div");
+
+trail.className="cursor-trail";
+
+trail.style.left=e.clientX+"px";
+trail.style.top=e.clientY+"px";
+
+document.body.appendChild(trail);
+
+setTimeout(()=>trail.remove(),600);
+
+});
+
+/* heart burst */
+
+document.addEventListener("click",(e)=>{
+
+if(e.target.classList.contains("yes")){
+
+for(let i=0;i<10;i++){
+
+let heart=document.createElement("div");
+
+heart.innerHTML="💛";
+
+heart.style.position="fixed";
+
+heart.style.left=(window.innerWidth/2)+"px";
+
+heart.style.top=(window.innerHeight/2)+"px";
+
+heart.style.fontSize="26px";
+
+heart.style.animation="floatUp 2s ease forwards";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),2000);
+
+}
+
+}
+
+});
+
+    </script>
+
+</body>
+</html>
